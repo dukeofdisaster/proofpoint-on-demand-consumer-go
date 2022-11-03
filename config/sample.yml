@@ -1,0 +1,3 @@
+endpoint: 'someendpointhere'
+apikey: 'someapikeyhere'
+log.path: '/tmp/podreader.log'
