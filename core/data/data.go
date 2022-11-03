@@ -172,3 +172,11 @@ type MessagePart struct {
 	TextExtracted string `json:"textExtracted"`
 	Urls []string `json:"urls"`
 }
+
+type Config struct {
+	Endpoint string `yaml:"endpoint"`
+	ApiKey string `yaml:"apikey"`
+	Log struct {
+		Path string `yaml:"path"`
+	}
+}
