@@ -16,7 +16,7 @@ type PODEvent struct {
 		Tls           struct {
 			Inbound struct {
 				Cipher      string `json:"cipher"`
-				CipherBytes string `json:"cipherBytes"`
+				CipherBits string `json:"cipherBits"`
 				Version     string `json:"version"`
 			}
 		}
@@ -108,6 +108,7 @@ type PODEvent struct {
 		Header struct {
 			From      []string `json:"from"`
 			MessageId []string `json:"message-id"`
+			ReturnPath []string `json:"return-path"`
 			Subject   []string `json:"subject"`
 			To        []string `json:"to"`
 		}
@@ -171,7 +172,11 @@ type MessagePart struct {
 	SizeDecodedBytes int      `json:"sizeDecodedBytes"`
 	StructureId      string   `json:"structureId"`
 	TextExtracted    string   `json:"textExtracted"`
-	Urls             []string `json:"urls"`
+	Urls             []UrlItem `json:"urls"`
+}
+type UrlItem struct {
+	Src []string `json:"src"`
+	Url string `json:"url"`
 }
 
 type Config struct {
@@ -182,5 +187,12 @@ type Config struct {
 	Endpoint string `yaml:"endpoint"`
 	Log      struct {
 		Path string `yaml:"path"`
+	}
+	// this will probably fail to be compat with libbeat? thought output was array... maybe not
+	Output struct {
+		File struct {
+			Path     string `yaml:"path"`
+			Filename string `yaml:"filename"`
+		}
 	}
 }
