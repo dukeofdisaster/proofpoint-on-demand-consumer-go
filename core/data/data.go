@@ -196,7 +196,7 @@ type Config struct {
 		// a writeable path 
 		Path string `yaml:"path"`
 		// the period in minutes at which periodic checkpoints are written to disk
-		Interval int `yaml:"interval"`
+		Interval int64 `yaml:"interval"`
 		// the offset in minutes  to start the event stream from... i.e. if last ran at 13:30 and Offset is 10, then sinceTime
 		// supplied to the Proofpoint API will be 13:20
 		Offset string `yaml:"offset"`
