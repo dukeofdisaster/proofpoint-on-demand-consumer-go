@@ -179,6 +179,10 @@ type UrlItem struct {
 	Url string `json:"url"`
 }
 
+type Checkpoint struct {
+	Timestamp int `json:"timestamp"`
+}
+
 type Config struct {
 	ApiKey   string `yaml:"apikey"`
 	// path to a sqlite db for tracking seen guids to ensure no duplicate events
