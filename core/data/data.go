@@ -180,7 +180,7 @@ type UrlItem struct {
 }
 
 type Checkpoint struct {
-	Timestamp int `json:"timestamp"`
+	Timestamp int64 `json:"timestamp"`
 }
 
 type Config struct {
