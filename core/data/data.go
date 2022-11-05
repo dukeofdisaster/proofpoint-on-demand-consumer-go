@@ -181,8 +181,21 @@ type UrlItem struct {
 
 type Config struct {
 	ApiKey   string `yaml:"apikey"`
+	// path to a sqlite db for tracking seen guids to ensure no duplicate events
+	// TODO:
+	//	- choose config opts for max # of guids before we roll the db or table; i.e. new_events | old_events
 	Database struct {
 		Path string `yaml:"path"`
+	}
+	// Write a periodic check point to disk so the utility can ensure overlap; i.e. no missed events
+	CheckPoint struct {
+		// a writeable path 
+		Path string `yaml:"path"`
+		// the period in minutes at which periodic checkpoints are written to disk
+		Interval int `yaml:"interval"`
+		// the offset in minutes  to start the event stream from... i.e. if last ran at 13:30 and Offset is 10, then sinceTime
+		// supplied to the Proofpoint API will be 13:20
+		Offset string `yaml:"offset"`
 	}
 	Endpoint string `yaml:"endpoint"`
 	Log      struct {
