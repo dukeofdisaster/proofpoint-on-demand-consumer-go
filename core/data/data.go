@@ -15,9 +15,9 @@ type PODEvent struct {
 		Sid           string `json:"sid"`
 		Tls           struct {
 			Inbound struct {
-				Cipher      string `json:"cipher"`
+				Cipher     string `json:"cipher"`
 				CipherBits string `json:"cipherBits"`
-				Version     string `json:"version"`
+				Version    string `json:"version"`
 			}
 		}
 	}
@@ -106,11 +106,11 @@ type PODEvent struct {
 	}
 	Msg struct {
 		Header struct {
-			From      []string `json:"from"`
-			MessageId []string `json:"message-id"`
+			From       []string `json:"from"`
+			MessageId  []string `json:"message-id"`
 			ReturnPath []string `json:"return-path"`
-			Subject   []string `json:"subject"`
-			To        []string `json:"to"`
+			Subject    []string `json:"subject"`
+			To         []string `json:"to"`
 		}
 		Lang             string `json:"lang"`
 		NormalizedHeader struct {
@@ -169,14 +169,14 @@ type MessagePart struct {
 	MD5               string `json:"md5"`
 	SHA256            string `json:"sha256"`
 	// don't recall if these are actually int when they come across
-	SizeDecodedBytes int      `json:"sizeDecodedBytes"`
-	StructureId      string   `json:"structureId"`
-	TextExtracted    string   `json:"textExtracted"`
+	SizeDecodedBytes int       `json:"sizeDecodedBytes"`
+	StructureId      string    `json:"structureId"`
+	TextExtracted    string    `json:"textExtracted"`
 	Urls             []UrlItem `json:"urls"`
 }
 type UrlItem struct {
 	Src []string `json:"src"`
-	Url string `json:"url"`
+	Url string   `json:"url"`
 }
 
 type Checkpoint struct {
@@ -184,7 +184,9 @@ type Checkpoint struct {
 }
 
 type Config struct {
-	ApiKey   string `yaml:"apikey"`
+	// An offset
+	Ago    AgoType `yaml:"ago"`
+	ApiKey string  `yaml:"apikey"`
 	// path to a sqlite db for tracking seen guids to ensure no duplicate events
 	// TODO:
 	//	- choose config opts for max # of guids before we roll the db or table; i.e. new_events | old_events
@@ -193,7 +195,7 @@ type Config struct {
 	}
 	// Write a periodic check point to disk so the utility can ensure overlap; i.e. no missed events
 	CheckPoint struct {
-		// a writeable path 
+		// a writeable path
 		Path string `yaml:"path"`
 		// the period in minutes at which periodic checkpoints are written to disk
 		Interval int64 `yaml:"interval"`
@@ -212,4 +214,8 @@ type Config struct {
 			Filename string `yaml:"filename"`
 		}
 	}
+}
+type AgoType struct {
+	Units string `yaml:"units"`
+	Value int    `yaml:"value"`
 }

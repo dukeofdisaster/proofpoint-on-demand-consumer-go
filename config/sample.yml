@@ -1,3 +1,8 @@
-endpoint: 'someendpointhere'
+ago.units: m
+ago.value: 15
+endpoint: 'ws://localhost:8080'
 apikey: 'someapikeyhere'
 log.path: '/tmp/podreader.log'
+output.file:
+  path: '/tmp/beatout'
+  filename: "output.json"
